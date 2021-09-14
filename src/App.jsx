@@ -23,7 +23,7 @@ export class App extends Component {
         temp: weatherResponse.data.current.temp,
       };
       this.setState({ location: weatherInfo });
-      debugger;
+      // debugger;
     });
   }
 
@@ -33,7 +33,7 @@ export class App extends Component {
       <div data-cy="weather-display">
         <h1 id="header">The Weather App</h1>
           <p data-cy="temp">{this.state.location.temp}°C</p>
-        <p data-cy="location">{this.state.location.city}</p>
+        <p data-cy="location">{this.state.location.city} bananas</p>
         <p>
           {/* {this.state.location.temp} */}
         </p>

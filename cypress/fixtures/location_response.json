@@ -1,24 +1,148 @@
 {
   "documentation": "https://opencagedata.com/api",
-  "licences": [
-    {
-      "name": "see attribution guide",
-      "url": "https://opencagedata.com/credits"
-    }
+  "licenses": [
+      {
+          "name": "see attribution guide",
+          "url": "https://opencagedata.com/credits"
+      }
   ],
   "rate": {
-    "limit": 2500,
-    "remaining": 2498,
-    "reset": 1612396800
+      "limit": 2500,
+      "remaining": 2407,
+      "reset": 1631664000
   },
   "results": [
-    {
-      "annotations": {
-        "DMS": {
-          "lat": "40° 44' 30.822'' N",
-          "lng": "73° 59' 21.508'' E"
-        }
+      {
+          "annotations": {
+              "DMS": {
+                  "lat": "57° 42' 24.41952'' N",
+                  "lng": "11° 58' 1.81416'' E"
+              },
+              "MGRS": "32VPJ7678499937",
+              "Maidenhead": "JO57xq69bp",
+              "Mercator": {
+                  "x": 1332179.34,
+                  "y": 7869821.3
+              },
+              "OSM": {
+                  "edit_url": "https://www.openstreetmap.org/edit?way=166331025#map=17/57.70678/11.96717",
+                  "note_url": "https://www.openstreetmap.org/note/new#map=17/57.70678/11.96717&layers=N",
+                  "url": "https://www.openstreetmap.org/?mlat=57.70678&mlon=11.96717#map=17/57.70678/11.96717"
+              },
+              "UN_M49": {
+                  "regions": {
+                      "EUROPE": "150",
+                      "NORTHERN_EUROPE": "154",
+                      "SE": "752",
+                      "WORLD": "001"
+                  },
+                  "statistical_groupings": [
+                      "MEDC"
+                  ]
+              },
+              "callingcode": 46,
+              "currency": {
+                  "alternate_symbols": [
+                      ":-"
+                  ],
+                  "decimal_mark": ",",
+                  "disambiguate_symbol": "SEK",
+                  "format": "%n %u",
+                  "html_entity": "",
+                  "iso_code": "SEK",
+                  "iso_numeric": "752",
+                  "name": "Swedish Krona",
+                  "smallest_denomination": 100,
+                  "subunit": "Öre",
+                  "subunit_to_unit": 100,
+                  "symbol": "kr",
+                  "symbol_first": 0,
+                  "thousands_separator": " "
+              },
+              "flag": "🇸🇪",
+              "geohash": "u628234nrk14jt29cd7z",
+              "qibla": 139.01,
+              "roadinfo": {
+                  "drive_on": "right",
+                  "road": "Brunnsparken",
+                  "road_reference": "E1",
+                  "road_type": "platform",
+                  "speed_in": "km/h"
+              },
+              "sun": {
+                  "rise": {
+                      "apparent": 1631594460,
+                      "astronomical": 1631586000,
+                      "civil": 1631592120,
+                      "nautical": 1631589240
+                  },
+                  "set": {
+                      "apparent": 1631640780,
+                      "astronomical": 1631649180,
+                      "civil": 1631643120,
+                      "nautical": 1631646000
+                  }
+              },
+              "timezone": {
+                  "name": "Europe/Stockholm",
+                  "now_in_dst": 1,
+                  "offset_sec": 7200,
+                  "offset_string": "+0200",
+                  "short_name": "CEST"
+              },
+              "what3words": {
+                  "words": "glitz.curable.hurry"
+              }
+          },
+          "bounds": {
+              "northeast": {
+                  "lat": 57.7068214,
+                  "lng": 11.9674089
+              },
+              "southwest": {
+                  "lat": 57.7067694,
+                  "lng": 11.9670847
+              }
+          },
+          "components": {
+              "ISO_3166-1_alpha-2": "SE",
+              "ISO_3166-1_alpha-3": "SWE",
+              "_category": "road",
+              "_type": "road",
+              "city": "Gothenburg",
+              "city_district": "Centrum",
+              "continent": "Europe",
+              "country": "Sweden",
+              "country_code": "se",
+              "county": "Västra Götaland County",
+              "municipality": "Göteborgs Stad",
+              "political_union": "European Union",
+              "postcode": "404 39",
+              "road": "Brunnsparken",
+              "road_reference": "E1",
+              "road_type": "platform",
+              "suburb": "North Town"
+          },
+          "confidence": 9,
+          "formatted": "Brunnsparken, 404 39 Gothenburg, Sweden",
+          "geometry": {
+              "lat": 57.7067832,
+              "lng": 11.9671706
+          }
       }
-    }
-  ]
+  ],
+  "status": {
+      "code": 200,
+      "message": "OK"
+  },
+  "stay_informed": {
+      "blog": "https://blog.opencagedata.com",
+      "twitter": "https://twitter.com/OpenCage"
+  },
+  "thanks": "For using an OpenCage API",
+  "timestamp": {
+      "created_http": "Tue, 14 Sep 2021 20:32:04 GMT",
+      "created_unix": 1631651524
+  },
+  "total_results": 1
 }
