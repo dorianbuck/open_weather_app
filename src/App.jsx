@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 export class App extends Component {
   state = {
-    geolocation: {},
+    location: {},
   };
 
   componentDidMount() {
@@ -32,7 +32,11 @@ export class App extends Component {
     return (
       <div data-cy="weather-display">
         <h1 id="header">The Weather App</h1>
-        <p data-cy="temp">16.99°C</p>
+          <p data-cy="temp">{this.state.location.temp}°C</p>
+        <p data-cy="location">{this.state.location.city}</p>
+        <p>
+          {/* {this.state.location.temp} */}
+        </p>
       </div>
     );
   }

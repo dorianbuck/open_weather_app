@@ -26,7 +26,7 @@ describe("The weather app", () => {
     });
 
     cy.get("[data-cy=weather-display]").within(() => {
-      cy.get("[data-cy=temp]").should("contain", "16.99°C");
+      cy.get("[data-cy=temp]").should("contain", "9.04°C");
       cy.get("[data-cy=location]").should("contain", "Virum");
     });
   });
