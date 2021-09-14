@@ -14,9 +14,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:silent": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open & yarn start",
+    "cypress": "start-server-and-test start:silent http://localhost:3000 cy:open"
+
   },
   "eslintConfig": {
     "extends": [
