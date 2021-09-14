@@ -1,0 +1,24 @@
+{
+  "documentation": "https://opencagedata.com/api",
+  "licences": [
+    {
+      "name": "see attribution guide",
+      "url": "https://opencagedata.com/credits"
+    }
+  ],
+  "rate": {
+    "limit": 2500,
+    "remaining": 2498,
+    "reset": 1612396800
+  },
+  "results": [
+    {
+      "annotations": {
+        "DMS": {
+          "lat": "55° 47' 2.90400'' N",
+          "lng": "12° 27' 6.24960'' E"
+        }
+      }
+    }
+  ]
+}

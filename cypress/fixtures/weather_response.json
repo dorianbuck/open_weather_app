@@ -1,0 +1,12 @@
+{
+  "latitude": 55.5167,
+  "longitude": 13,
+  "timezone": "Europe/Copenhagen",
+  "timezone-offset": 3600,
+  "current": {
+    "dt": 1612352237,
+    "sunrise": 1612335617,
+    "sunset": 1612367263,
+    "temp": 9.04
+  }
+}
