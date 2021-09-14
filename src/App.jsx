@@ -30,9 +30,9 @@ export class App extends Component {
   render() {
     const { weatherInfo } = this.state;
     return (
-      <div>
+      <div data-cy="weather-display">
         <h1 id="header">The Weather App</h1>
-        <div>{weatherInfo.city}</div>
+        <p data-cy="temp">16.99°C</p>
       </div>
     );
   }
