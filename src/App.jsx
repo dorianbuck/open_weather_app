@@ -21,22 +21,30 @@ export class App extends Component {
       const weatherInfo = {
         city: locationResponse.data.results[0].components.city,
         temp: weatherResponse.data.current.temp,
+        sunrise: weatherResponse.data.current.sunrise,
       };
       this.setState({ location: weatherInfo });
       // debugger;
     });
   }
 
+  // const city = locationResponse.data.results[0].components.city;
+  // debugger;
+  // if (city != "undefined") {
+  //   return locationResponse.data.results[0].components.city;
+  // } else {
+  //   return JSON.parse("move somewhere better");
+  // }
+
   render() {
-    const { weatherInfo } = this.state;
     return (
       <div data-cy="weather-display">
         <h1 id="header">The Weather App</h1>
-          <p data-cy="temp">{this.state.location.temp}°C</p>
-        <p data-cy="location">{this.state.location.city} </p>
-        <p>
-          {/* {this.state.location.temp} */}
-        </p>
+        <p data-cy="temp">Temperature: {this.state.location.temp}°C</p>
+        <p data-cy="location">Your location is: {this.state.location.city} </p>
+        <p data-cy="sunrise">Sunrise at: {this.state.location.sunrise} </p>
+        <p data-cy="sunset">Sunrise at: {this.state.location.sunset} </p>
+        <p>{/* {this.state.location.temp} */}</p>
       </div>
     );
   }
