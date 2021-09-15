@@ -32,8 +32,8 @@ describe("The weather app", () => {
     cy.get("[data-cy=weather-display]").within(() => {
       cy.get("[data-cy=temp]").should("contain", "16.99°C");
       cy.get("[data-cy=location]").should("contain", "Gothenburg");
-      cy.get("[data-cy=sunrise]").should("contain", "06:42");
-      cy.get("[data-cy=sunset]").should("contain", "17:42");
+      cy.get("[data-cy=sunrise]").should("contain", "Sunrise at: 06:40:19");
+      cy.get("[data-cy=sunset]").should("contain", "Sunset at: 19:35:20");
       cy.get("[data-cy=windspeed]").should("contain", 1.540)
       cy.get("[data-cy=description]").should("contain", "clear sky")
     });

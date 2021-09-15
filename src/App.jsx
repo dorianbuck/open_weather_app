@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 
+
 export class App extends Component {
   state = {
     location: {},
@@ -21,13 +22,13 @@ export class App extends Component {
       const weatherInfo = {
         city: locationResponse.data.results[0].components.city,
         temp: weatherResponse.data.current.temp,
-        sunrise: weatherResponse.data.current.sunrise,
-        sunset: weatherResponse.data.current.sunset,
+        sunrise: new Date(weatherResponse.data.current.sunrise * 1000).toLocaleTimeString("sv-SV"), 
+        sunset: new Date(weatherResponse.data.current.sunset * 1000).toLocaleTimeString("sv-SV"),
         windspeed: weatherResponse.data.current.wind_speed,
-        description: weatherResponse.data.current.weather[0].description
+        description: weatherResponse.data.current.weather[0].description.toUpperCase()
       };
       this.setState({ location: weatherInfo });
-      debugger;
+      // debugger;
     });
   }
 
@@ -45,8 +46,8 @@ export class App extends Component {
         <h1 id="header">The Weather App</h1>
         <p data-cy="temp">Temperature: {this.state.location.temp}°C</p>
         <p data-cy="location">Your location is: {this.state.location.city} </p>
-        <p data-cy="sunrise" unix format="HH:mm">Sunrise at: {this.state.location.sunrise} </p>
-        <p data-cy="sunset" format="HH:mm">Sunset at: {this.state.location.sunset} </p>
+        <p data-cy="sunrise" >Sunrise at: {this.state.location.sunrise} </p>
+        <p data-cy="sunset" >Sunset at: {this.state.location.sunset} </p>
         <p data-cy="windspeed">Windspeed:{this.state.location.windspeed}</p>
         <p data-cy="description">State of weather: {this.state.location.description}</p>
         <p>{/* {this.state.location.temp} */}</p>
