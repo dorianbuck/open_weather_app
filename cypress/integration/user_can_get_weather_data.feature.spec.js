@@ -37,5 +37,9 @@ describe("The weather app", () => {
       cy.get("[data-cy=windspeed]").should("contain", 1.540)
       cy.get("[data-cy=description]").should("contain", "CLEAR SKY")
     });
+
+    cy.get("[data-cy=weather-forcast-hourly").within(() => {
+      cy.get("data-cy=")
+    })
   });
 });
