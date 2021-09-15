@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
-import LocationData from "./components/LocationData";
 
 export class App extends Component {
   state = {
@@ -38,11 +37,14 @@ export class App extends Component {
         // temp_19hr: weatherResponse.data.hourly[0].temp,
       };
 
-      let everyHour = " "; 
+      let hourlyTemp = [];
       for (let i = 0; i < 48; i++) {
-        everyHour += (weatherResponse.data.hourly[i].temp) + " °C " + '<br>';
+       hourlyTemp += "At " + [new Date(
+        weatherResponse.data.hourly[i].dt * 1000
+      ).toLocaleTimeString("sv-SV")] + " the temperature will be " + [weatherResponse.data.hourly[i].temp] + " °C <br>"
       }
-       document.getElementById("demo").innerHTML = everyHour;
+      debugger;
+      document.getElementById("demo").innerHTML = hourlyTemp;
 
       this.setState({ location: weatherInfo });
       // debugger;
@@ -66,7 +68,6 @@ export class App extends Component {
     const wind = this.state.location.windspeed;
     const description = this.state.location.description;
 
-    
     const temp_19hr = this.state.location.temp_19hr;
 
     return (
@@ -75,7 +76,6 @@ export class App extends Component {
           <Grid.Row>
             <Grid.Column>
               <h1 id="header">The Weather App</h1>
-              <p id="demo"></p>
             </Grid.Column>
           </Grid.Row>
 
@@ -128,6 +128,7 @@ export class App extends Component {
             <Grid.Row>
               <Grid.Column>
                 <p data-cy="temp_19hr">Temperature: {temp_19hr}°C</p>
+                <p id="demo"></p>
               </Grid.Column>
             </Grid.Row>
           </div>
