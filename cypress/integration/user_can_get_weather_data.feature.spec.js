@@ -3,7 +3,7 @@ describe("The weather app", () => {
     cy.intercept("https://api.openweathermap.org/data/2.5/**", {
       fixture: "weather_response.json",
     });
-    cy.intercept("https://api.opencagedata.com/geocode/v1/json/**", {
+    cy.intercept("https://api.opencagedata.com/geocode/v1/**", {
       fixture: "location_response.json",
     });
   });
@@ -13,8 +13,8 @@ describe("The weather app", () => {
       onBeforeLoad(window) {
         const stubLocation = {
           coords: {
-            latitude: 55.5167,
-            longitude: 13,
+            latitude: 57.7067832,
+            longitude: 11.9671706,
           },
         };
         cy.stub(window.navigator.geolocation, "getCurrentPosition").callsFake(
@@ -27,7 +27,7 @@ describe("The weather app", () => {
 
     cy.get("[data-cy=weather-display]").within(() => {
       cy.get("[data-cy=temp]").should("contain", "16.99°C");
-      cy.get("[data-cy=location]").should("contain", "Virum");
+      cy.get("[data-cy=location]").should("contain", "Gothenburg");
     });
   });
 
