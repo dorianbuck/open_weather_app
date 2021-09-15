@@ -18,9 +18,9 @@ export class App extends Component {
       );
 
       const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude={,minutely,hourly,daily,alerts}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude={,minutely,daily,alerts}&appid=${apiKey}`
       );
-      
+
       const weatherInfo = {
         city: locationResponse.data.results[0].components.city,
         country: locationResponse.data.results[0].components.country,
@@ -34,6 +34,8 @@ export class App extends Component {
         windspeed: weatherResponse.data.current.wind_speed,
         description:
           weatherResponse.data.current.weather[0].description.toUpperCase(),
+
+          temp_19hr:weatherResponse.data.hourly[1,4].temp,
       };
       this.setState({ location: weatherInfo });
       // debugger;
@@ -50,23 +52,30 @@ export class App extends Component {
 
   render() {
     const temp = this.state.location.temp;
-    const city = this.state.location.city
+    const city = this.state.location.city;
     const country = this.state.location.country;
     const sunrise = this.state.location.sunrise;
     const sunset = this.state.location.sunset;
     const wind = this.state.location.windspeed;
     const description = this.state.location.description;
 
+    const temp_19hr = this.state.location.temp_19hr;
+
     return (
       <Segment vertical>
         <Grid container="text">
-          <div data-cy="weather-display">
+          <Grid.Row>
+            <Grid.Column>
+              <h1 id="header">The Weather App</h1>
+            </Grid.Column>
+          </Grid.Row>
+
+          <div data-cy="weather-current">
             <Grid.Row>
               <Grid.Column>
-                <h1 id="header">The Weather App</h1>
+                <h3>Current Weather</h3>
               </Grid.Column>
             </Grid.Row>
-
             <Grid.Row>
               <Grid.Column>
                 <p data-cy="temp">Temperature: {temp}°C</p>
@@ -100,6 +109,19 @@ export class App extends Component {
               </Grid.Column>
             </Grid.Row>
             <p>{/* {this.state.location.temp} */}</p>
+          </div>
+          <div data-cy="weather_19hr">
+          <Grid.Row>
+              <Grid.Column>
+                <h3>Hourly Forcast</h3>
+              </Grid.Column>
+            </Grid.Row>
+          <Grid.Row>
+              <Grid.Column>
+                <p data-cy="temp_19hr">Temperature: {temp_19hr}°C</p>
+              </Grid.Column>
+            </Grid.Row>
+
           </div>
         </Grid>
       </Segment>
