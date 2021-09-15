@@ -34,12 +34,22 @@ describe("The weather app", () => {
       cy.get("[data-cy=location]").should("contain", "Gothenburg");
       cy.get("[data-cy=sunrise]").should("contain", "Sunrise at: 06:40:19");
       cy.get("[data-cy=sunset]").should("contain", "Sunset at: 19:35:20");
-      cy.get("[data-cy=windspeed]").should("contain", 1.540)
-      cy.get("[data-cy=description]").should("contain", "CLEAR SKY")
+      cy.get("[data-cy=windspeed]").should("contain", 1.54);
+      cy.get("[data-cy=description]").should("contain", "CLEAR SKY");
     });
 
-    cy.get("[data-cy=weather-forcast-hourly").within(() => {
-      cy.get("data-cy=")
-    })
+    cy.get("[data-cy=weather-19:00").within(() => {
+      cy.get("data-cy=temp-19:00").should("contain", "16.75°C");
+      cy.get("[data-cy=windspeed-19:00]").should("contain", 1.54);
+      cy.get("[data-cy=description-19:00]").should("contain", "FEW CLOUDS");
+      cy.get("[data-cy=rain-19:00]").should("contain", "No rain!");
+    });
+
+    cy.get("[data-cy=weather-22:00").within(() => {
+      cy.get("data-cy=temp-22:00").should("contain", "15.96°C");
+      cy.get("[data-cy=windspeed-22:00]").should("contain", 5.7);
+      cy.get("[data-cy=description-22:00]").should("contain", "LIGHT RAIN");
+      cy.get("[data-cy=rain-19:00]").should("contain", "0.32");
+    });
   });
 });

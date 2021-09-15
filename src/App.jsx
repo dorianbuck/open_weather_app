@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
+import LocationData from "./components/LocationData";
 
 export class App extends Component {
   state = {
@@ -19,6 +20,7 @@ export class App extends Component {
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude={,minutely,hourly,daily,alerts}&appid=${apiKey}`
       );
+      
       const weatherInfo = {
         city: locationResponse.data.results[0].components.city,
         country: locationResponse.data.results[0].components.country,
@@ -48,7 +50,7 @@ export class App extends Component {
 
   render() {
     const temp = this.state.location.temp;
-    const city = this.state.location.city;
+    const city = this.state.location.city
     const country = this.state.location.country;
     const sunrise = this.state.location.sunrise;
     const sunset = this.state.location.sunset;

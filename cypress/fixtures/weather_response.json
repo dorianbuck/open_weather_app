@@ -24,10 +24,7 @@
         "description": "clear sky",
         "icon": "01n"
       }
-    ],
-    "rain": {
-      "1h": 0.26
-    }
+    ]
   },
   "hourly": [
     {

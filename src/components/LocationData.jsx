@@ -18,9 +18,12 @@ export class LocationData extends Component {
         city: locationResponse.data.results[0].components.city,
       };
       this.setState({ location: locationInfo });
-      // debugger;
-      return {locationInfo}
     });
+  }
+
+  render() {
+    const cityLocation = this.state.location.city;
+    return cityLocation;
   }
 }
 
