@@ -35,8 +35,15 @@ export class App extends Component {
         description:
           weatherResponse.data.current.weather[0].description.toUpperCase(),
 
-          temp_19hr:weatherResponse.data.hourly[1,4].temp,
+        // temp_19hr: weatherResponse.data.hourly[0].temp,
       };
+
+      let everyHour = " "; 
+      for (let i = 0; i < 48; i++) {
+        everyHour += (weatherResponse.data.hourly[i].temp) + " °C " + '<br>';
+      }
+       document.getElementById("demo").innerHTML = everyHour;
+
       this.setState({ location: weatherInfo });
       // debugger;
     });
@@ -59,6 +66,7 @@ export class App extends Component {
     const wind = this.state.location.windspeed;
     const description = this.state.location.description;
 
+    
     const temp_19hr = this.state.location.temp_19hr;
 
     return (
@@ -67,6 +75,7 @@ export class App extends Component {
           <Grid.Row>
             <Grid.Column>
               <h1 id="header">The Weather App</h1>
+              <p id="demo"></p>
             </Grid.Column>
           </Grid.Row>
 
@@ -111,17 +120,16 @@ export class App extends Component {
             <p>{/* {this.state.location.temp} */}</p>
           </div>
           <div data-cy="weather_19hr">
-          <Grid.Row>
+            <Grid.Row>
               <Grid.Column>
                 <h3>Hourly Forcast</h3>
               </Grid.Column>
             </Grid.Row>
-          <Grid.Row>
+            <Grid.Row>
               <Grid.Column>
                 <p data-cy="temp_19hr">Temperature: {temp_19hr}°C</p>
               </Grid.Column>
             </Grid.Row>
-
           </div>
         </Grid>
       </Segment>
