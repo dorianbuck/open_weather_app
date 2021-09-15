@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-
+import { Grid, Segment } from "semantic-ui-react";
 
 export class App extends Component {
   state = {
@@ -21,11 +21,17 @@ export class App extends Component {
       );
       const weatherInfo = {
         city: locationResponse.data.results[0].components.city,
+        country: locationResponse.data.results[0].components.country,
         temp: weatherResponse.data.current.temp,
-        sunrise: new Date(weatherResponse.data.current.sunrise * 1000).toLocaleTimeString("sv-SV"), 
-        sunset: new Date(weatherResponse.data.current.sunset * 1000).toLocaleTimeString("sv-SV"),
+        sunrise: new Date(
+          weatherResponse.data.current.sunrise * 1000
+        ).toLocaleTimeString("sv-SV"),
+        sunset: new Date(
+          weatherResponse.data.current.sunset * 1000
+        ).toLocaleTimeString("sv-SV"),
         windspeed: weatherResponse.data.current.wind_speed,
-        description: weatherResponse.data.current.weather[0].description.toUpperCase()
+        description:
+          weatherResponse.data.current.weather[0].description.toUpperCase(),
       };
       this.setState({ location: weatherInfo });
       // debugger;
@@ -41,17 +47,60 @@ export class App extends Component {
   // }
 
   render() {
+    const temp = this.state.location.temp;
+    const city = this.state.location.city;
+    const country = this.state.location.country;
+    const sunrise = this.state.location.sunrise;
+    const sunset = this.state.location.sunset;
+    const wind = this.state.location.windspeed;
+    const description = this.state.location.description;
+
     return (
-      <div data-cy="weather-display">
-        <h1 id="header">The Weather App</h1>
-        <p data-cy="temp">Temperature: {this.state.location.temp}°C</p>
-        <p data-cy="location">Your location is: {this.state.location.city} </p>
-        <p data-cy="sunrise" >Sunrise at: {this.state.location.sunrise} </p>
-        <p data-cy="sunset" >Sunset at: {this.state.location.sunset} </p>
-        <p data-cy="windspeed">Windspeed:{this.state.location.windspeed}</p>
-        <p data-cy="description">State of weather: {this.state.location.description}</p>
-        <p>{/* {this.state.location.temp} */}</p>
-      </div>
+      <Segment vertical>
+        <Grid container="text">
+          <div data-cy="weather-display">
+            <Grid.Row>
+              <Grid.Column>
+                <h1 id="header">The Weather App</h1>
+              </Grid.Column>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column>
+                <p data-cy="temp">Temperature: {temp}°C</p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <p data-cy="location">
+                  Your location is: {city}, {country}
+                </p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <p data-cy="sunrise">Sunrise at: {sunrise}</p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <p data-cy="sunset">Sunset at: {sunset} </p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <p data-cy="windspeed">Windspeed: {wind}m/s</p>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <p data-cy="description">Current weather: {description}</p>
+              </Grid.Column>
+            </Grid.Row>
+            <p>{/* {this.state.location.temp} */}</p>
+          </div>
+        </Grid>
+      </Segment>
     );
   }
 }
