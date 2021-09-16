@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
+// import { Line } from "react-chartjs-2";
 
 export class App extends Component {
   state = {
     location: {},
+    chart: {}
   };
 
   componentDidMount() {
@@ -39,28 +41,17 @@ export class App extends Component {
         // temp_19hr: weatherResponse.data.hourly[0].temp,
       };
 
-      let hourlyTemp = [];
-      for (let i = 0; i < 48; i++) {
-        hourlyTemp +=
-          "At " +
-          [
-            new Date(
-              weatherResponse.data.hourly[i].dt * 1000
-            ).toLocaleTimeString("sv-SV"),
-          ] +
-          " the temperature will be " +
-          [weatherResponse.data.hourly[i].temp] +
-          " °C <br>";
-      }
-      debugger;
-      document.getElementById("demo").innerHTML = hourlyTemp;
+      const hourlyForcast = {
+        tempHr: weatherResponse.data.hourly[0].temp,
+      };
 
       this.setState({ location: weatherInfo });
-      // debugger;
+      this.setState({ chart: hourlyForcast });
     });
   }
 
   render() {
+
     const temp = this.state.location.temp;
     const location = this.state.location.location;
     const country = this.state.location.country;
@@ -69,7 +60,7 @@ export class App extends Component {
     const wind = this.state.location.windspeed;
     const description = this.state.location.description;
 
-    const temp_19hr = this.state.location.temp_19hr;
+    const temp_19hr = this.state.chart.tempHr;
 
     return (
       <Segment vertical>
