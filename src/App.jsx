@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
-// import { Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 export class App extends Component {
   state = {
@@ -22,6 +22,8 @@ export class App extends Component {
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude={,minutely,daily,alerts}&appid=${apiKey}`
       );
 
+      this.setState({ hourlyForcast: weatherResponse.data.hourly });
+
       const weatherInfo = {
         location: locationResponse.data.results[0].components.city
           ? locationResponse.data.results[0].components.city
@@ -37,39 +39,48 @@ export class App extends Component {
         windspeed: weatherResponse.data.current.wind_speed,
         description:
           weatherResponse.data.current.weather[0].description.toUpperCase(),
-
-        // temp_19hr: weatherResponse.data.hourly[0].temp,
       };
 
-      const hourlyForcast = {
-        tempHr: weatherResponse.data.hourly[0].temp,
-        timeHr: new Date(
-          weatherResponse.data.hourly[0].dt * 1000
-        ).toLocaleDateString("sv-SV"),
-      };
+      // const hourlyForcast = {
+      //   tempHr: weatherResponse.data.hourly[0].temp,
+      //   timeHr: new Date(
+      //     weatherResponse.data.hourly[0].dt * 1000
+      //   ).toLocaleDateString("sv-SV"),
+      // };
 
       this.setState({ location: weatherInfo });
-      this.setState({ chart: hourlyForcast });
     });
   }
 
   render() {
-    const { hourlyForcast } = this.state;
+    const { weatherInfo, hourlyForcast } = this.state;
 
     let labels = [];
     let dataItems = [];
     let data;
     if (hourlyForcast) {
       hourlyForcast.forEach((hour) => {
-        labels.push(hour.timeHr.hour);
-        dataItems.push(hour.tempHr.hour);
+        labels.push(new Date(hour.dt * 1000).toLocaleDateString("sv-SV"));
+        dataItems.push(hour.temp);
       });
       data = {
         labels: labels,
         datasets: [{ label: "Hourly temperature", data: dataItems }],
       };
     }
-    
+
+    const options = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    };
+
     const temp = this.state.location.temp;
     const location = this.state.location.location;
     const country = this.state.location.country;
@@ -77,10 +88,10 @@ export class App extends Component {
     const sunset = this.state.location.sunset;
     const wind = this.state.location.windspeed;
     const description = this.state.location.description;
-    
+
     const temp_19hr = this.state.chart.tempHr;
-    
-    debugger
+
+    debugger;
     return (
       <Segment vertical>
         <Grid container="text">
@@ -139,7 +150,11 @@ export class App extends Component {
             <Grid.Row>
               <Grid.Column>
                 <p data-cy="temp_19hr">Temperature: {temp_19hr}°C</p>
-              
+              <div>
+               
+                  <Line data={data} options={options} />
+                
+                </div>
               </Grid.Column>
             </Grid.Row>
           </div>
