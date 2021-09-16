@@ -60,7 +60,7 @@ export class App extends Component {
     let data;
     if (hourlyForcast) {
       hourlyForcast.forEach((hour) => {
-        labels.push(new Date(hour.dt * 1000).toLocaleDateString("sv-SV"));
+        labels.push(new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, { hour: '2-digit', minute:'2-digit'}));
         dataItems.push(hour.temp);
       });
       data = {
@@ -141,7 +141,7 @@ export class App extends Component {
             </Grid.Row>
             <p>{/* {this.state.location.temp} */}</p>
           </div>
-          <div data-cy="weather_19hr">
+          <div data-cy="hourlyForcast">
             <Grid.Row>
               <Grid.Column>
                 <h3>Hourly Forcast</h3>
@@ -149,11 +149,13 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="temp_19hr">Temperature: {temp_19hr}°C</p>
-              <div>
-               
+                <div>
+                  <canvas
+                    height="400"
+                    width="800"
+                    data-testid="canvas"
+                  ></canvas>
                   <Line data={data} options={options} />
-                
                 </div>
               </Grid.Column>
             </Grid.Row>
