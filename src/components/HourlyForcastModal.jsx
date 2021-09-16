@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 
-function HourlyModal({ modalData }) {
+function HourlyModal({ tempData, rainData }) {
   const [hourlyModal, setHourlyModal] = React.useState(false);
 
   return (
@@ -19,14 +19,8 @@ function HourlyModal({ modalData }) {
       <Modal.Content>
         <Modal.Description>
           <Header>Hourly Forcast</Header>
-          <Line
-            canvas
-            height="400"
-            width="800"
-            data-testid="canvas"
-            data={modalData}
-            // options={options}
-          />
+          <Line height="400" width="800" data={tempData} />
+          <Bar height="400" width="800" data={rainData} />
         </Modal.Description>
       </Modal.Content>
     </Modal>

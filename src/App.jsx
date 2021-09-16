@@ -113,18 +113,6 @@ export class App extends Component {
       };
     }
 
-    // const options = {
-    //   scales: {
-    //     yAxes: [
-    //       {
-    //         ticks: {
-    //           beginAtZero: true,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // };
-
     const temp = this.state.location.temp;
     const location = this.state.location.location;
     const country = this.state.location.country;
@@ -188,15 +176,7 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <Line
-                  canvas
-                  height="400"
-                  width="800"
-                  data-testid="canvas"
-                  data={tempData}
-                />
-                <Bar data={rainData} />
-                <HourlyModal modalData={tempData} />
+                <HourlyModal tempData={(tempData)} rainData={(rainData)} />
               </Grid.Column>
             </Grid.Row>
           </div>
