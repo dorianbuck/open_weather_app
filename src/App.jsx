@@ -21,7 +21,9 @@ export class App extends Component {
       );
 
       const weatherInfo = {
-        city: locationResponse.data.results[0].components.city,
+        location: locationResponse.data.results[0].components.city
+          ? locationResponse.data.results[0].components.city
+          : locationResponse.data.results[0].components.county,
         country: locationResponse.data.results[0].components.country,
         temp: weatherResponse.data.current.temp,
         sunrise: new Date(
@@ -39,9 +41,16 @@ export class App extends Component {
 
       let hourlyTemp = [];
       for (let i = 0; i < 48; i++) {
-       hourlyTemp += "At " + [new Date(
-        weatherResponse.data.hourly[i].dt * 1000
-      ).toLocaleTimeString("sv-SV")] + " the temperature will be " + [weatherResponse.data.hourly[i].temp] + " °C <br>"
+        hourlyTemp +=
+          "At " +
+          [
+            new Date(
+              weatherResponse.data.hourly[i].dt * 1000
+            ).toLocaleTimeString("sv-SV"),
+          ] +
+          " the temperature will be " +
+          [weatherResponse.data.hourly[i].temp] +
+          " °C <br>";
       }
       debugger;
       document.getElementById("demo").innerHTML = hourlyTemp;
@@ -51,17 +60,9 @@ export class App extends Component {
     });
   }
 
-  // const city = locationResponse.data.results[0].components.city;
-  // debugger;
-  // if (city != "undefined") {
-  //   return locationResponse.data.results[0].components.city;
-  // } else {
-  //   return JSON.parse("move somewhere better");
-  // }
-
   render() {
     const temp = this.state.location.temp;
-    const city = this.state.location.city;
+    const location = this.state.location.location;
     const country = this.state.location.country;
     const sunrise = this.state.location.sunrise;
     const sunset = this.state.location.sunset;
@@ -93,7 +94,7 @@ export class App extends Component {
             <Grid.Row>
               <Grid.Column>
                 <p data-cy="location">
-                  Your location is: {city}, {country}
+                  Your location is: {location}, {country}
                 </p>
               </Grid.Column>
             </Grid.Row>
