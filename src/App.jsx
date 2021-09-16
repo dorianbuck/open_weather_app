@@ -22,8 +22,6 @@ export class App extends Component {
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude={,minutely,daily,alerts}&appid=${apiKey}`
       );
 
-      this.setState({ hourlyForcast: weatherResponse.data.hourly });
-
       const weatherInfo = {
         location: locationResponse.data.results[0].components.city
           ? locationResponse.data.results[0].components.city
@@ -41,31 +39,38 @@ export class App extends Component {
           weatherResponse.data.current.weather[0].description.toUpperCase(),
       };
 
-      // const hourlyForcast = {
-      //   tempHr: weatherResponse.data.hourly[0].temp,
-      //   timeHr: new Date(
-      //     weatherResponse.data.hourly[0].dt * 1000
-      //   ).toLocaleDateString("sv-SV"),
-      // };
-
+      this.setState({ hourlyForcast: weatherResponse.data.hourly });
       this.setState({ location: weatherInfo });
     });
   }
 
   render() {
-    const { weatherInfo, hourlyForcast } = this.state;
+    const { hourlyForcast } = this.state;
 
     let labels = [];
     let dataItems = [];
     let data;
     if (hourlyForcast) {
       hourlyForcast.forEach((hour) => {
-        labels.push(new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, { hour: '2-digit', minute:'2-digit'}));
+        labels.push(
+          new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        );
         dataItems.push(hour.temp);
       });
       data = {
         labels: labels,
-        datasets: [{ label: "Hourly temperature", data: dataItems }],
+        datasets: [
+          {
+            label: "Hourly Temperature",
+            data: dataItems,
+            fill: true,
+            backgroundColor: "rgb(25, 99, 82)",
+            borderColor: "rgba(85, 199, 132, 0.2)",
+          },
+        ],
       };
     }
 
@@ -97,7 +102,7 @@ export class App extends Component {
         <Grid container="text">
           <Grid.Row>
             <Grid.Column>
-              <h1 id="header">The Weather App</h1>
+              <h1 id="header">Frasian Weather</h1>
             </Grid.Column>
           </Grid.Row>
 
