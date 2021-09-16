@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
-import LocationData from "./components/LocationData";
+// import LocationData from "./components/LocationData";
 
 export class App extends Component {
   state = {
@@ -38,11 +38,12 @@ export class App extends Component {
         // temp_19hr: weatherResponse.data.hourly[0].temp,
       };
 
-      let everyHour = " "; 
+      let hourlyTemp = " ";
+      debugger
       for (let i = 0; i < 48; i++) {
-        everyHour += (weatherResponse.data.hourly[i].temp) + " °C " + '<br>';
+        hourlyTemp += (weatherResponse.data.hourly[i].temp)
       }
-       document.getElementById("demo").innerHTML = everyHour;
+       document.getElementById("demo").innerHTML = hourlyTemp;
 
       this.setState({ location: weatherInfo });
       // debugger;
@@ -75,7 +76,7 @@ export class App extends Component {
           <Grid.Row>
             <Grid.Column>
               <h1 id="header">The Weather App</h1>
-              <p id="demo"></p>
+              <p id="demo">°C<br></br></p>
             </Grid.Column>
           </Grid.Row>
 
