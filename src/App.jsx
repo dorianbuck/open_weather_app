@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment, Header } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
+import { Line, Bar } from "react-chartjs-2";
 
 export class App extends Component {
   state = {
@@ -12,8 +13,8 @@ export class App extends Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(async (position) => {
       let { latitude, longitude } = position.coords;
-      const apiKey = "f60022513894d605a73019f85cab7c76";
-      const ocApiKey = "a0e78a029fc64aac88ff24befed68ab5";
+      const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+      const ocApiKey = process.env.REACT_APP_LOCATION_API_KEY;
 
       const locationResponse = await axios({
         method: "GET",
@@ -96,16 +97,16 @@ export class App extends Component {
             minute: "2-digit",
           })
         );
-        rainDataItems.push(hour.rain);
+        rainDataItems.push(hour.pop);
       });
       rainData = {
         labels: rainLabels,
         datasets: [
           {
-            label: "Hourly Temperature",
+            label: "Hourly Precipitation",
             data: rainDataItems,
             fill: true,
-            backgroundColor: "rgb(25, 99, 82)",
+            backgroundColor: "rgb(256, 0, 0)",
             borderColor: "rgba(85, 199, 132, 0.2)",
           },
         ],
@@ -187,14 +188,15 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                {/* <Line
+                <Line
                   canvas
                   height="400"
                   width="800"
                   data-testid="canvas"
                   data={tempData}
-                  options={options}
-                /> */}
+                 
+                />
+                <Bar data={rainData} />
                 <HourlyModal hourlyModal={tempData} />
               </Grid.Column>
             </Grid.Row>

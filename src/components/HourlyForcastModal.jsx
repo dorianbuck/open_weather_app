@@ -9,7 +9,7 @@ function HourlyModal({ tempData }) {
     <Modal
       onClose={() => setHourlyModal(false)}
       onOpen={() => setHourlyModal(true)}
-      hourlyModal={tempData}
+      hourlyModal={hourlyModal}
       trigger={
         <Button attached="right" positive className="modal-button">
           Check Out Hourly Forcast
