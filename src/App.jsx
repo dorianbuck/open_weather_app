@@ -58,25 +58,52 @@ export class App extends Component {
   render() {
     const { hourlyForcast } = this.state;
 
-    let labels = [];
-    let dataItems = [];
-    let data;
+    let tempLabels = [];
+    let tempDataItems = [];
+    let tempData;
     if (hourlyForcast) {
       hourlyForcast.forEach((hour) => {
-        labels.push(
+        tempLabels.push(
           new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
             hour: "2-digit",
             minute: "2-digit",
           })
         );
-        dataItems.push(hour.temp);
+        tempDataItems.push(hour.temp);
       });
-      data = {
-        labels: labels,
+      tempData = {
+        labels: tempLabels,
         datasets: [
           {
             label: "Hourly Temperature",
-            data: dataItems,
+            data: tempDataItems,
+            fill: true,
+            backgroundColor: "rgb(25, 99, 82)",
+            borderColor: "rgba(85, 199, 132, 0.2)",
+          },
+        ],
+      };
+    }
+
+    let rainLabels = [];
+    let rainDataItems = [];
+    let rainData = [];
+    if (hourlyForcast) {
+      hourlyForcast.forEach((hour) => {
+        rainLabels.push(
+          new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        );
+        rainDataItems.push(hour.rain.1h);
+      });
+      rainData = {
+        labels: rainLabels,
+        datasets: [
+          {
+            label: "Hourly Temperature",
+            data: rainDataItems,
             fill: true,
             backgroundColor: "rgb(25, 99, 82)",
             borderColor: "rgba(85, 199, 132, 0.2)",
@@ -170,7 +197,7 @@ export class App extends Component {
                   height="400"
                   width="800"
                   data-testid="canvas"
-                  data={data}
+                  data={tempData}
                   options={options}
                 />
               </Grid.Column>
