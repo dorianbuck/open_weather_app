@@ -14,13 +14,24 @@ export class App extends Component {
       let { latitude, longitude } = position.coords;
       const apiKey = "f60022513894d605a73019f85cab7c76";
       const ocApiKey = "a0e78a029fc64aac88ff24befed68ab5";
-      const locationResponse = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${ocApiKey}`
-      );
 
-      const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude={,minutely,daily,alerts}&appid=${apiKey}`
-      );
+      const locationResponse = await axios({
+        method: "GET",
+        url: `https://api.opencagedata.com/geocode/v1/json`,
+        params: { key: `${ocApiKey}`, q: `${latitude}+${longitude}` },
+      });
+
+      const weatherResponse = await axios({
+        mothod: "GET",
+        url: `https://api.openweathermap.org/data/2.5/onecall`,
+        params: {
+          appid: `${apiKey}`,
+          lat: `${latitude}`,
+          lon: `${longitude}`,
+          units: "metric",
+          exclude: `{minutely,daily,alerts}`,
+        },
+      });
 
       const weatherInfo = {
         location: locationResponse.data.results[0].components.city
@@ -96,7 +107,7 @@ export class App extends Component {
 
     const temp_19hr = this.state.chart.tempHr;
 
-    debugger;
+    // debugger;
     return (
       <Segment vertical>
         <Grid container="text">
@@ -154,14 +165,14 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <div>
-                  <canvas
-                    height="400"
-                    width="800"
-                    data-testid="canvas"
-                  ></canvas>
-                  <Line data={data} options={options} />
-                </div>
+                <Line
+                  canvas
+                  height="400"
+                  width="800"
+                  data-testid="canvas"
+                  data={data}
+                  options={options}
+                />
               </Grid.Column>
             </Grid.Row>
           </div>
