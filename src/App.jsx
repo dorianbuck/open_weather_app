@@ -6,7 +6,7 @@ import { Grid, Segment } from "semantic-ui-react";
 export class App extends Component {
   state = {
     location: {},
-    chart: {}
+    chart: {},
   };
 
   componentDidMount() {
@@ -43,6 +43,9 @@ export class App extends Component {
 
       const hourlyForcast = {
         tempHr: weatherResponse.data.hourly[0].temp,
+        timeHr: new Date(
+          weatherResponse.data.hourly[0].dt * 1000
+        ).toLocaleDateString("sv-SV"),
       };
 
       this.setState({ location: weatherInfo });
@@ -51,7 +54,22 @@ export class App extends Component {
   }
 
   render() {
+    const { hourlyForcast } = this.state;
 
+    let labels = [];
+    let dataItems = [];
+    let data;
+    if (hourlyForcast) {
+      hourlyForcast.forEach((hour) => {
+        labels.push(hour.timeHr.hour);
+        dataItems.push(hour.tempHr.hour);
+      });
+      data = {
+        labels: labels,
+        datasets: [{ label: "Hourly temperature", data: dataItems }],
+      };
+    }
+    
     const temp = this.state.location.temp;
     const location = this.state.location.location;
     const country = this.state.location.country;
@@ -59,9 +77,10 @@ export class App extends Component {
     const sunset = this.state.location.sunset;
     const wind = this.state.location.windspeed;
     const description = this.state.location.description;
-
+    
     const temp_19hr = this.state.chart.tempHr;
-
+    
+    debugger
     return (
       <Segment vertical>
         <Grid container="text">
@@ -120,7 +139,7 @@ export class App extends Component {
             <Grid.Row>
               <Grid.Column>
                 <p data-cy="temp_19hr">Temperature: {temp_19hr}°C</p>
-                <p id="demo"></p>
+              
               </Grid.Column>
             </Grid.Row>
           </div>
