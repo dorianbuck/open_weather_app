@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment, Header } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
-import { Line, Bar } from "react-chartjs-2";
 
 export class App extends Component {
   state = {
@@ -48,7 +47,7 @@ export class App extends Component {
         ).toLocaleTimeString("sv-SV"),
         windspeed: weatherResponse.data.current.wind_speed,
         description:
-          weatherResponse.data.current.weather[0].description.toUpperCase(),
+          weatherResponse.data.current.weather[0].description,
       };
 
       this.setState({ hourlyForcast: weatherResponse.data.hourly });
@@ -127,7 +126,7 @@ export class App extends Component {
         <Header color="olive" size="huge" textAlign="center" dividing>
           <h1 id="header">Frasian Weather</h1>
         </Header>
-        <Grid container="text">
+        <Grid container="text" textAlign="justified">
           <div data-cy="weather-current">
             <Grid.Row>
               <Grid.Column>
@@ -136,14 +135,14 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="temp">Temperature: {temp}°C</p>
+                <p data-cy="location">
+                  The current weather in {location}, {country} is {description}
+                </p>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="location">
-                  Your location is: {location}, {country}
-                </p>
+                <p data-cy="temp"> Temperature: {temp}°C</p>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -159,11 +158,6 @@ export class App extends Component {
             <Grid.Row>
               <Grid.Column>
                 <p data-cy="windspeed">Windspeed: {wind}m/s</p>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <p data-cy="description">Current weather: {description}</p>
               </Grid.Column>
             </Grid.Row>
             <p>{/* {this.state.location.temp} */}</p>
