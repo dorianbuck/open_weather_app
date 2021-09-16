@@ -194,10 +194,9 @@ export class App extends Component {
                   width="800"
                   data-testid="canvas"
                   data={tempData}
-                 
                 />
                 <Bar data={rainData} />
-                <HourlyModal hourlyModal={tempData} />
+                <HourlyModal modalData={tempData} />
               </Grid.Column>
             </Grid.Row>
           </div>

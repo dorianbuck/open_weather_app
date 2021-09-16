@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Header, Modal } from "semantic-ui-react";
 import { Line } from "react-chartjs-2";
 
-function HourlyModal({ tempData }) {
+function HourlyModal({ modalData }) {
   const [hourlyModal, setHourlyModal] = React.useState(false);
 
   return (
@@ -24,7 +24,7 @@ function HourlyModal({ tempData }) {
             height="400"
             width="800"
             data-testid="canvas"
-            data={tempData}
+            data={modalData}
             // options={options}
           />
         </Modal.Description>
