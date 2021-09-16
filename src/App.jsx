@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Grid, Segment } from "semantic-ui-react";
 import { Line } from "react-chartjs-2";
+import HourlyModal from "./components/HourlyForcastModal";
 
 export class App extends Component {
   state = {
@@ -85,32 +86,32 @@ export class App extends Component {
       };
     }
 
-    let rainLabels = [];
-    let rainDataItems = [];
-    let rainData = [];
-    if (hourlyForcast) {
-      hourlyForcast.forEach((hour) => {
-        rainLabels.push(
-          new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        );
-        rainDataItems.push(hour.rain.1h);
-      });
-      rainData = {
-        labels: rainLabels,
-        datasets: [
-          {
-            label: "Hourly Temperature",
-            data: rainDataItems,
-            fill: true,
-            backgroundColor: "rgb(25, 99, 82)",
-            borderColor: "rgba(85, 199, 132, 0.2)",
-          },
-        ],
-      };
-    }
+    // let rainLabels = [];
+    // let rainDataItems = [];
+    // let rainData = [];
+    // if (hourlyForcast) {
+    //   hourlyForcast.forEach((hour) => {
+    //     rainLabels.push(
+    //       new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
+    //         hour: "2-digit",
+    //         minute: "2-digit",
+    //       })
+    //     );
+    //     rainDataItems.push(hour.rain.1h);
+    //   });
+    //   rainData = {
+    //     labels: rainLabels,
+    //     datasets: [
+    //       {
+    //         label: "Hourly Temperature",
+    //         data: rainDataItems,
+    //         fill: true,
+    //         backgroundColor: "rgb(25, 99, 82)",
+    //         borderColor: "rgba(85, 199, 132, 0.2)",
+    //       },
+    //     ],
+    //   };
+    // }
 
     const options = {
       scales: {
@@ -192,14 +193,15 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <Line
+                {/* <Line
                   canvas
                   height="400"
                   width="800"
                   data-testid="canvas"
                   data={tempData}
                   options={options}
-                />
+                /> */}
+                <HourlyModal hourlyModal={tempData}/>
               </Grid.Column>
             </Grid.Row>
           </div>

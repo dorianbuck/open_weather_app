@@ -37,19 +37,5 @@ describe("The weather app", () => {
       cy.get("[data-cy=windspeed]").should("contain", 1.54);
       cy.get("[data-cy=description]").should("contain", "CLEAR SKY");
     });
-
-    cy.get("[data-cy=weather_19hr]").within(() => {
-      cy.get("[data-cy=temp_19hr]").should("contain", "16.75°C");
-      cy.get("[data-cy=windspeed_19hr]").should("contain", 1.54);
-      cy.get("[data-cy=description_19hr]").should("contain", "FEW CLOUDS");
-      cy.get("[data-cy=rain_19hr]").should("contain", "No rain!");
-    });
-
-    cy.get("[data-cy=weather_22hr]").within(() => {
-      cy.get("[data-cy=temp_22hr]").should("contain", "15.96°C");
-      cy.get("[data-cy=windspeed_22hr]").should("contain", 5.7);
-      cy.get("[data-cy=description_22hr]").should("contain", "LIGHT RAIN");
-      cy.get("[data-cy=rain_22hr]").should("contain", "0.32");
-    });
   });
 });
