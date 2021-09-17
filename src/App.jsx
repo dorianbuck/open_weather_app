@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Grid, Header, Icon, Container } from "semantic-ui-react";
+import { Grid, Header, Icon, Container, Divider } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
 import DailyModal from "./components/DailyForcastModal";
-
 
 export class App extends Component {
   state = {
@@ -57,8 +56,8 @@ export class App extends Component {
           description: weatherResponse.data.current.weather[0].description,
         };
 
-      this.setState({ hourlyForcast: weatherResponse.data.hourly });
-      this.setState({ dailyForcast: weatherResponse.data.daily });
+        this.setState({ hourlyForcast: weatherResponse.data.hourly });
+        this.setState({ dailyForcast: weatherResponse.data.daily });
 
         this.setState({ location: weatherInfo });
       },
@@ -70,7 +69,7 @@ export class App extends Component {
 
   render() {
     const { hourlyForcast } = this.state;
-    const {dailyForcast} = this.state;
+    const { dailyForcast } = this.state;
 
     const temp = this.state.location.temp;
     const location = this.state.location.location;
@@ -138,7 +137,8 @@ export class App extends Component {
               </Grid.Column>
             </Grid.Row>
           </div>
-          <div data-cy="hourlyForcast">
+
+          <div data-cy="Forcast">
             <Grid.Row>
               <Grid.Column>
                 <h3>Forcast</h3>
@@ -146,9 +146,12 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <HourlyModal hourlyRain={hourlyForcast} hourlyTemp={hourlyForcast}/>
-               
-                <DailyModal dailyRain={dailyForcast} dailyTemp={dailyForcast}/>
+                <HourlyModal
+                  hourlyRain={hourlyForcast}
+                  hourlyTemp={hourlyForcast}
+                />
+
+                <DailyModal dailyRain={dailyForcast} dailyTemp={dailyForcast} />
               </Grid.Column>
             </Grid.Row>
           </div>
