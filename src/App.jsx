@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Grid, Header, Icon, Container, Divider } from "semantic-ui-react";
+import { Grid, Header, Icon, Container } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
 import DailyModal from "./components/DailyForcastModal";
 
