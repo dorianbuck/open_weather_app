@@ -58,8 +58,7 @@ function HourlyModal({ hourlyTemp, hourlyRain }) {
         ],
       };
     }
-    debugger
-    
+    // debugger
     return (
       <Modal
       onClose={() => setHourlyModal(false)}
