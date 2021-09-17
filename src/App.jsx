@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Grid, Segment, Header, Icon, Container } from "semantic-ui-react";
+import { Grid, Header, Icon, Container } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
 
 export class App extends Component {
   state = {
     location: {},
-    chart: {},
   };
 
   componentDidMount() {
@@ -29,7 +28,7 @@ export class App extends Component {
           lat: `${latitude}`,
           lon: `${longitude}`,
           units: "metric",
-          exclude: `{minutely,daily,alerts}`,
+          exclude: `{,daily,minutely,alerts}`,
         },
       });
 
@@ -56,66 +55,14 @@ export class App extends Component {
       };
 
       this.setState({ hourlyForcast: weatherResponse.data.hourly });
+      this.setState({ hourlyForcast: weatherResponse.data.daily });
+
       this.setState({ location: weatherInfo });
     });
   }
 
   render() {
     const { hourlyForcast } = this.state;
-
-    let tempLabels = [];
-    let tempDataItems = [];
-    let tempData;
-    if (hourlyForcast) {
-      hourlyForcast.forEach((hour) => {
-        tempLabels.push(
-          new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        );
-        tempDataItems.push(hour.temp);
-      });
-      tempData = {
-        labels: tempLabels,
-        datasets: [
-          {
-            label: "Hourly Temperature",
-            data: tempDataItems,
-            fill: true,
-            backgroundColor: "rgb(25, 99, 82)",
-            borderColor: "rgba(85, 199, 132, 0.2)",
-          },
-        ],
-      };
-    }
-
-    let rainLabels = [];
-    let rainDataItems = [];
-    let rainData = [];
-    if (hourlyForcast) {
-      hourlyForcast.forEach((hour) => {
-        rainLabels.push(
-          new Date(hour.dt * 1000).toLocaleTimeString(navigator.language, {
-            hour: "2-digit",
-            minute: "2-digit",
-          })
-        );
-        rainDataItems.push(hour.pop);
-      });
-      rainData = {
-        labels: rainLabels,
-        datasets: [
-          {
-            label: "Hourly Precipitation",
-            data: rainDataItems,
-            fill: true,
-            backgroundColor: "rgb(256, 0, 0)",
-            borderColor: "rgba(85, 199, 132, 0.2)",
-          },
-        ],
-      };
-    }
 
     const temp = this.state.location.temp;
     const location = this.state.location.location;
@@ -190,7 +137,7 @@ export class App extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <HourlyModal tempData={tempData} rainData={rainData} />
+                <HourlyModal hourlyRain={hourlyForcast} hourlyTemp={hourlyForcast}/>
               </Grid.Column>
             </Grid.Row>
           </div>
