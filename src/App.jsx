@@ -147,7 +147,7 @@ export class App extends Component {
             <Grid.Row>
               <Grid.Column>
                 <HourlyModal hourlyRain={hourlyForcast} hourlyTemp={hourlyForcast}/>
-                <br />
+               
                 <DailyModal dailyRain={dailyForcast} dailyTemp={dailyForcast}/>
               </Grid.Column>
             </Grid.Row>
