@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Grid, Segment, Header } from "semantic-ui-react";
+import { Grid, Segment, Header, Icon } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
 
 export class App extends Component {
@@ -41,13 +41,18 @@ export class App extends Component {
         temp: weatherResponse.data.current.temp,
         sunrise: new Date(
           weatherResponse.data.current.sunrise * 1000
-        ).toLocaleTimeString("sv-SV"),
+        ).toLocaleTimeString(navigator.language, {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
         sunset: new Date(
           weatherResponse.data.current.sunset * 1000
-        ).toLocaleTimeString("sv-SV"),
+        ).toLocaleTimeString(navigator.language, {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
         windspeed: weatherResponse.data.current.wind_speed,
-        description:
-          weatherResponse.data.current.weather[0].description,
+        description: weatherResponse.data.current.weather[0].description,
       };
 
       this.setState({ hourlyForcast: weatherResponse.data.hourly });
@@ -126,51 +131,67 @@ export class App extends Component {
         <Header color="olive" size="huge" textAlign="center" dividing>
           <h1 id="header">Frasian Weather</h1>
         </Header>
-        <Grid container="text" textAlign="justified">
+        <Grid
+          container="text"
+          textAlign="justified"
+          padded="vertically"
+          celled="internally"
+        >
           <div data-cy="weather-current">
             <Grid.Row>
               <Grid.Column>
                 <h3>Current Weather</h3>
               </Grid.Column>
             </Grid.Row>
+            <Grid.Row >
+              <Grid.Column > 
+                <p1 data-cy="location">
+                  The current weather in {location}, {country} is {description}.
+                </p1>
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="location">
-                  The current weather in {location}, {country} is {description}
+                <p data-cy="temp">
+                  <Icon loading name="thermometer half" color="red" size="big" />
+                  Temperature: {temp}°C
                 </p>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="temp"> Temperature: {temp}°C</p>
+                <p data-cy="sunrise">
+                  <Icon loading name="sun" color="yellow" size="big" />
+                  Sunrise at: {sunrise}
+                </p>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="sunrise">Sunrise at: {sunrise}</p>
+                <p data-cy="sunset">
+                  <Icon loading name="moon" color="grey" size="big" />
+                  Sunset at: {sunset}{" "}
+                </p>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <p data-cy="sunset">Sunset at: {sunset} </p>
+                <p data-cy="windspeed">
+                  <Icon loading name="arrow right" color="olive" size="big" />
+                  Windspeed: {wind}m/s
+                </p>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <p data-cy="windspeed">Windspeed: {wind}m/s</p>
-              </Grid.Column>
-            </Grid.Row>
-            <p>{/* {this.state.location.temp} */}</p>
           </div>
           <div data-cy="hourlyForcast">
             <Grid.Row>
               <Grid.Column>
-                <h3>Hourly Forcast</h3>
+                <h3>Forcast</h3>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
-                <HourlyModal tempData={(tempData)} rainData={(rainData)} />
+                <HourlyModal tempData={tempData} rainData={rainData} />
               </Grid.Column>
             </Grid.Row>
           </div>
