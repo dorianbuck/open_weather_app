@@ -59,7 +59,7 @@ function DailyModal({ dailyTemp, dailyRain }) {
       onOpen={() => setdailyModal(true)}
       dailyModal={dailyModal}
       trigger={
-        <Button attached="right" className="modal-button" color="olive" size="large">
+        <Button attached="bottom" className="modal-button" color="olive" >
           Check Out Daily Forcast
         </Button>
       }
