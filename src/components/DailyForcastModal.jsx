@@ -7,12 +7,10 @@ function DailyModal({ dailyTemp, dailyRain }) {
 
   let tempLabels = [];
   let tempDataItems = [];
-  let tempData =[];
+  let tempData = [];
   if (dailyTemp) {
     dailyTemp.forEach((daily) => {
-      tempLabels.push(
-        new Date(daily.dt * 1000).toLocaleDateString()
-      );
+      tempLabels.push(new Date(daily.dt * 1000).toLocaleDateString());
       tempDataItems.push(daily.temp.day);
     });
     tempData = {
@@ -28,47 +26,56 @@ function DailyModal({ dailyTemp, dailyRain }) {
       ],
     };
   }
-  
+
   let rainLabels = [];
   let rainDataItems = [];
   let rainData = [];
   if (dailyRain) {
     dailyRain.forEach((daily) => {
-      rainLabels.push(
-        new Date(daily.dt * 1000).toLocaleDateString()
-        );
-        rainDataItems.push(daily.pop);
-      });
-      rainData = {
-        labels: rainLabels,
-        datasets: [
-          {
-            label: "Daily Precipitation",
-            data: rainDataItems,
-            fill: true,
-            backgroundColor: "rgb(256, 0, 0)",
-            borderColor: "rgba(85, 199, 132, 0.2)",
-          },
-        ],
-      };
-    }
-    // debugger
-    return (
-      <Modal
+      rainLabels.push(new Date(daily.dt * 1000).toLocaleDateString());
+      rainDataItems.push(daily.pop);
+    });
+    rainData = {
+      labels: rainLabels,
+      datasets: [
+        {
+          label: "Daily Precipitation",
+          data: rainDataItems,
+          fill: true,
+          backgroundColor: "rgb(256, 0, 0)",
+          borderColor: "rgba(85, 199, 132, 0.2)",
+        },
+      ],
+    };
+  }
+  // debugger
+  return (
+    <Modal
+      data-cy="daily-modal-container"
       onClose={() => setdailyModal(false)}
       onOpen={() => setdailyModal(true)}
       dailyModal={dailyModal}
       trigger={
-        <Button attached="bottom" className="modal-button" color="olive" >
-          Check Out Daily Forcast
+        <Button attached="bottom" data-cy="view-button-daily" color="olive">
+          Check Out Daily Forecast
         </Button>
       }
-      >
+    >
       <Modal.Content>
         <Modal.Description>
-          <Header>Daily Forcast</Header>
-          <Line height="400" width="800" data={tempData} />
-          <Bar height="400" width="800" data={rainData} />
+          <Header>Daily Forecast</Header>
+          <Line
+            data-cy="temp-daily-graph"
+            height="300"
+            width="700"
+            data={tempData}
+          />
+          <Bar
+            data-cy="rain-daily-graph"
+            height="300"
+            width="700"
+            data={rainData}
+          />
         </Modal.Description>
       </Modal.Content>
     </Modal>

@@ -61,20 +61,21 @@ function HourlyModal({ hourlyTemp, hourlyRain }) {
     // debugger
     return (
       <Modal
+        data-cy="hourly-modal-container"
       onClose={() => setHourlyModal(false)}
       onOpen={() => setHourlyModal(true)}
       hourlyModal={hourlyModal}
       trigger={
-        <Button attached="top" className="modal-button" color="olive" >
-          Check Out Hourly Forcast
+        <Button attached="top" data-cy="view-button" color="olive" >
+          Check Out Hourly Forecast
         </Button>
       }
       >
-      <Modal.Content>
+      <Modal.Content >
         <Modal.Description>
-          <Header>Hourly Forcast</Header>
-          <Line height="400" width="800" data={tempData} />
-          <Bar height="400" width="800" data={rainData} />
+          <Header>Hourly Forecast</Header>
+          <Line data-cy="temp-hourly-graph" height="300" width="700" data={tempData} />
+          <Bar data-cy="rain-hourly-graph" height="300" width="700" data={rainData} />
         </Modal.Description>
       </Modal.Content>
     </Modal>

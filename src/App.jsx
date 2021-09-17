@@ -138,20 +138,24 @@ export class App extends Component {
             </Grid.Row>
           </div>
 
-          <div data-cy="Forcast">
+          <div data-cy="forecast">
             <Grid.Row>
               <Grid.Column>
-                <h3>Forcast</h3>
+                <h3>Forecast</h3>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              <Grid.Column>
+              <Grid.Column data-cy="hourly-modal">
                 <HourlyModal
                   hourlyRain={hourlyForcast}
                   hourlyTemp={hourlyForcast}
                 />
 
-                <DailyModal dailyRain={dailyForcast} dailyTemp={dailyForcast} />
+                <DailyModal
+                  data-cy="daily-modal"
+                  dailyRain={dailyForcast}
+                  dailyTemp={dailyForcast}
+                />
               </Grid.Column>
             </Grid.Row>
           </div>
