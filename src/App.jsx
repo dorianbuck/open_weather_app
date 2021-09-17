@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Grid, Segment, Header, Icon } from "semantic-ui-react";
+import { Grid, Segment, Header, Icon, Container } from "semantic-ui-react";
 import HourlyModal from "./components/HourlyForcastModal";
 
 export class App extends Component {
@@ -127,17 +127,16 @@ export class App extends Component {
 
     // debugger;
     return (
-      <Segment vertical>
+      <Container vertical>
         <Header color="olive" size="huge" textAlign="center" dividing>
           <h1 id="header">Frasian Weather</h1>
         </Header>
         <Grid
           container="text"
           textAlign="justified"
-          padded="vertically"
           celled="internally"
         >
-          <div data-cy="weather-current">
+          <div data-cy="weather-current" >
             <Grid.Row>
               <Grid.Column>
                 <h3>Current Weather</h3>
@@ -196,7 +195,7 @@ export class App extends Component {
             </Grid.Row>
           </div>
         </Grid>
-      </Segment>
+      </Container>
     );
   }
 }
