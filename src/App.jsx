@@ -55,7 +55,7 @@ export class App extends Component {
       };
 
       this.setState({ hourlyForcast: weatherResponse.data.hourly });
-      this.setState({ dailyForcast: weatherResponse.data.daily });
+      // this.setState({ dailyForcast: weatherResponse.data.daily });
 
       this.setState({ location: weatherInfo });
     });
@@ -63,7 +63,7 @@ export class App extends Component {
 
   render() {
     const { hourlyForcast } = this.state;
-    const {dailyForcast} = this.state;
+    // const {dailyForcast} = this.state;
 
     const temp = this.state.location.temp;
     const location = this.state.location.location;
