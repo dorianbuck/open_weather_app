@@ -1,6 +1,6 @@
 describe("Display of hourly focast modal", () => {
   beforeEach(() => {
-    cy.intercept("GET", "*/weatherResponse**", { fixture: "weather_respoonse.json" });
+    cy.intercept("GET", "*/weather_response**", { fixture: "weather_respoonse.json" });
     cy.visit("/");
 
     cy.get("#hourly-forcast").within(() => {

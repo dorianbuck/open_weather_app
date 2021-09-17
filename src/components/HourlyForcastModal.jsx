@@ -11,7 +11,7 @@ function HourlyModal({ tempData, rainData }) {
       onOpen={() => setHourlyModal(true)}
       hourlyModal={hourlyModal}
       trigger={
-        <Button attached="right" positive className="modal-button">
+        <Button attached="right" className="modal-button" color="olive" size="large">
           Check Out Hourly Forcast
         </Button>
       }
